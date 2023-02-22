@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, TextInput, Image, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
+import {showMessage} from 'react-native-flash-message';
+import auth from '@react-native-firebase/auth';
 
 import styles from './Sign.style';
 import Button from '../../../components/Button/Button';
+import authErrorMessages from '../../../utils/authErrorMessages';
 
 const initialFormValues = {
   email: '',
@@ -16,8 +19,30 @@ const Sign = ({navigation}) => {
     navigation.goBack();
   };
 
-  const handleFormSubmit = formValues => {
-    console.log(formValues);
+  const handleFormSubmit = async formValues => {
+    if (formValues.repassword !== formValues.password) {
+      showMessage({
+        message: 'Passwords must match!',
+        type: 'danger',
+      });
+      return;
+    }
+    try {
+      await auth().createUserWithEmailAndPassword(
+        formValues.email,
+        formValues.repassword,
+      );
+      showMessage({
+        message: 'User created successfully!',
+        type: 'success',
+      });
+      navigation.navigate('Login');
+    } catch (error) {
+      showMessage({
+        message: authErrorMessages(error.code),
+        type: 'danger',
+      });
+    }
   };
 
   return (
