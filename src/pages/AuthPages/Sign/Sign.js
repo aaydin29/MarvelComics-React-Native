@@ -2,17 +2,18 @@ import React from 'react';
 import {View, TextInput, Image, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
 
-import styles from './Login.style';
+import styles from './Sign.style';
 import Button from '../../../components/Button/Button';
 
 const initialFormValues = {
   email: '',
   password: '',
+  repassword: '',
 };
 
-const Login = ({navigation}) => {
-  const handleSign = () => {
-    navigation.navigate('Sign');
+const Sign = ({navigation}) => {
+  const handleBackLogin = () => {
+    navigation.goBack();
   };
 
   const handleFormSubmit = formValues => {
@@ -36,25 +37,32 @@ const Login = ({navigation}) => {
                 placeholder="E-mail"
               />
               <TextInput
+                secureTextEntry
                 style={styles.input}
                 value={values.password}
                 onChangeText={handleChange('password')}
-                secureTextEntry
                 placeholder="Password"
               />
+              <TextInput
+                secureTextEntry
+                style={styles.input}
+                value={values.repassword}
+                onChangeText={handleChange('repassword')}
+                placeholder="Confirm password"
+              />
             </View>
-            <Button text="Login" onPress={handleSubmit} />
+            <Button text="Register" onPress={handleSubmit} />
           </>
         )}
       </Formik>
       <View style={styles.register_container}>
-        <Text style={styles.register_title}>You don't have an account? </Text>
-        <TouchableOpacity onPress={handleSign}>
-          <Text style={styles.register_button}>Create</Text>
+        <Text style={styles.register_title}>Already have an account? </Text>
+        <TouchableOpacity onPress={handleBackLogin}>
+          <Text style={styles.register_button}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default Login;
+export default Sign;
