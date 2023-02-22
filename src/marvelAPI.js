@@ -43,10 +43,10 @@ const getSeries = async (limit = 30) => {
   }
 };
 
-const getCreators = async (limit = 30) => {
+const getStories = async (limit = 30) => {
   const timestamp = new Date().getTime();
   const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
-  const apiUrl = `https://gateway.marvel.com:443/v1/public/creators?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  const apiUrl = `https://gateway.marvel.com:443/v1/public/stories?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
   try {
     const response = await axios.get(apiUrl);
     return response.data.data.results;
@@ -56,4 +56,4 @@ const getCreators = async (limit = 30) => {
   }
 };
 
-export {getCharacters, getComics, getSeries, getCreators};
+export {getCharacters, getComics, getSeries, getStories};
