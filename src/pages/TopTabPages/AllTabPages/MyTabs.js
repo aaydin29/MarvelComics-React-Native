@@ -10,13 +10,19 @@ const Tab = createMaterialTopTabNavigator();
 
 const MyTabs = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={TabBarOptions}>
       <Tab.Screen name="Comics" component={Comics} />
       <Tab.Screen name="Characters" component={Characters} />
       <Tab.Screen name="Series" component={Series} />
       <Tab.Screen name="Stories" component={Stories} />
     </Tab.Navigator>
   );
+};
+
+const TabBarOptions = {
+  tabBarStyle: {backgroundColor: 'red'},
+  tabBarLabelStyle: {fontSize: 10, fontWeight: 'bold', color: 'black'},
+  tabBarIndicatorStyle: {backgroundColor: 'black'},
 };
 
 export default MyTabs;
