@@ -4,32 +4,27 @@ import colors from '../../../styles/colors/colors';
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.darkgray,
-    flexDirection: 'row',
   },
-  characters_container: {
+  events_container: {
     flex: 1,
-    // flexDirection: 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     margin: 10,
     padding: 5,
-    // borderWidth: 1,
-    borderRadius: 5,
+    borderBottomWidth: 1,
     borderColor: 'white',
-    marginHorizontal: 10,
-    width: 150,
+    marginHorizontal: 15,
   },
-  characters_image: {
-    width: 100,
-    height: 125,
+  events_image: {
+    width: 70,
+    height: 95,
+    marginRight: 10,
     borderRadius: 5,
   },
-  characters_title: {
+  events_title: {
     fontSize: 16,
     fontWeight: 'bold',
     flex: 1,
     color: 'white',
-    textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 5,
   },
 });

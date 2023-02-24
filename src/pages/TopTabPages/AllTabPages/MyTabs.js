@@ -4,7 +4,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Comics from '../Comics';
 import Characters from '../Characters';
 import Series from '../Series';
-import Stories from '../Stories';
+import Events from '../Events';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -14,7 +14,7 @@ const MyTabs = () => {
       <Tab.Screen name="Comics" component={Comics} />
       <Tab.Screen name="Characters" component={Characters} />
       <Tab.Screen name="Series" component={Series} />
-      <Tab.Screen name="Stories" component={Stories} />
+      <Tab.Screen name="Events" component={Events} />
     </Tab.Navigator>
   );
 };

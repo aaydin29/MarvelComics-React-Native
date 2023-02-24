@@ -1,27 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
-import {getSeries} from '../../../marvelAPI';
-import styles from './Series.style';
+import {getEvents} from '../../../marvelAPI';
+import styles from './Events.style';
 
-const Series = () => {
-  const [series, setSeries] = useState([]);
+const Events = () => {
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getSeries();
-      setSeries(result);
+      const result = await getEvents();
+      setEvents(result);
     };
     fetchData();
   }, []);
 
-  const renderSeries = ({item}) => {
+  const renderEvents = ({item}) => {
     return (
-      <View style={styles.series_container}>
+      <View style={styles.events_container}>
         <Image
-          style={styles.series_image}
+          style={styles.events_image}
           source={{uri: `${item.thumbnail.path}.${item.thumbnail.extension}`}}
         />
-        <Text style={styles.series_title}>{item.title}</Text>
+        <Text style={styles.events_title}>{item.title}</Text>
       </View>
     );
   };
@@ -29,12 +29,12 @@ const Series = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={series}
-        renderItem={renderSeries}
+        data={events}
+        renderItem={renderEvents}
         keyExtractor={item => item.id.toString()}
       />
     </View>
   );
 };
 
-export default Series;
+export default Events;

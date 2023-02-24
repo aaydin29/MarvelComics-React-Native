@@ -10,7 +10,7 @@ export default StyleSheet.create({
     padding: 10,
     color: 'white',
     fontWeight: '500',
-    fontSize: 18,
+    fontSize: 17,
     textAlign: 'center',
   },
 });
