@@ -10,6 +10,8 @@ import Sign from './pages/AuthPages/Sign';
 import Home from './pages/BottomTabPages/Home';
 import Favorites from './pages/BottomTabPages/Favorites';
 
+import CharacterDetail from './pages/DetailPages/CharacterDetail';
+
 import BottomTabBarIcon from './components/BottomTabBarIcon';
 
 const Tab = createBottomTabNavigator();
@@ -54,6 +56,11 @@ const Router = () => {
         ) : (
           <Stack.Screen name="BottomTabPages" component={BottomTabPages} />
         )}
+        <Stack.Screen
+          name="CharacterDetail"
+          component={CharacterDetail}
+          options={CharacterDetailOptions}
+        />
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>
@@ -78,6 +85,14 @@ const FavoritesOptions = () => ({
   tabBarIcon: ({focused}) => (
     <BottomTabBarIcon name="heart" focused={focused} size={28} />
   ),
+});
+
+const CharacterDetailOptions = () => ({
+  headerShown: true,
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: '#202020',
+  },
 });
 
 export default Router;

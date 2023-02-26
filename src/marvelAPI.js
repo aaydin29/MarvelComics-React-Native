@@ -56,4 +56,37 @@ const getEvents = async (limit = 50) => {
   }
 };
 
-export {getCharacters, getComics, getSeries, getEvents};
+const getComicsForCharacter = async (characterId, limit = 50) => {
+  const timestamp = new Date().getTime();
+  const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
+  const apiUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data.data.results;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const getSeriesForCharacter = async (characterId, limit = 50) => {
+  const timestamp = new Date().getTime();
+  const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
+  const apiUrl = `https://gateway.marvel.com:443/v1/public/characters/${characterId}/series?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data.data.results;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export {
+  getCharacters,
+  getComics,
+  getSeries,
+  getEvents,
+  getComicsForCharacter,
+  getSeriesForCharacter,
+};

@@ -8,15 +8,14 @@ export default StyleSheet.create({
   },
   characters_container: {
     flex: 1,
-    // flexDirection: 'row',
     alignItems: 'center',
     margin: 10,
     padding: 5,
-    // borderWidth: 1,
     borderRadius: 5,
     borderColor: 'white',
     marginHorizontal: 10,
     width: 150,
+    marginLeft: 25,
   },
   characters_image: {
     width: 100,
