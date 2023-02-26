@@ -33,46 +33,37 @@ const ComicDetail = ({route, navigation}) => {
   }, [comic]);
 
   const handleAddFavorites = async () => {
-    // const user = auth().currentUser;
-    // if (user) {
-    //   const userId = user.uid;
-    //   const favoritesRef = database().ref(`users/${userId}/favorites`);
-    //   const snapshot = await favoritesRef.once('value');
-    //   const data = snapshot.val();
-    //   if (!data || !data.comics) {
-    //     const newFavoritesRef = favoritesRef.child('comics');
-    //     newFavoritesRef.push({
-    //       comic: comic,
-    //     });
-    //     showMessage({
-    //       message: 'The comic has been added to favorites successfully!',
-    //       type: 'success',
-    //     });
-    //   } else {
-    //     let isExists = false;
-    //     for (const key in data.comics) {
-    //       if (data.comics[key].comic.id === comic.id) {
-    //         isExists = true;
-    //         break;
-    //       }
-    //     }
-    //     if (isExists) {
-    //       showMessage({
-    //         message: 'Failed! This comic is already in your favorites!',
-    //         type: 'danger',
-    //       });
-    //     } else {
-    //       const newFavoritesRef = favoritesRef.child('comics');
-    //       newFavoritesRef.push({
-    //         comic: comic,
-    //       });
-    //       showMessage({
-    //         message: 'The comic has been added to favorites successfully!',
-    //         type: 'success',
-    //       });
-    //     }
-    //   }
-    // }
+    const user = auth().currentUser;
+    if (user) {
+      const userId = user.uid;
+      const favoritesRef = database().ref(`users/${userId}/favorites/comics`);
+      const snapshot = await favoritesRef.once('value');
+      const data = snapshot.val();
+      let isExists = false;
+      if (data) {
+        for (const key in data) {
+          if (data[key]?.comic?.id === comic.id) {
+            isExists = true;
+            break;
+          }
+        }
+      }
+      if (isExists) {
+        showMessage({
+          message: 'Failed! This comic is already in your favorites!',
+          type: 'danger',
+        });
+      } else {
+        favoritesRef.push({
+          id: comic.id,
+          comic: comic,
+        });
+        showMessage({
+          message: 'The comic has been added to favorites successfully!',
+          type: 'success',
+        });
+      }
+    }
   };
 
   const handleCharacterSelect = item => {

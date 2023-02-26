@@ -17,7 +17,7 @@ import {getSeriesForCharacter, getComicsForCharacter} from '../../../marvelAPI';
 
 import ComicsAndSeriesCard from '../../../components/cards/ComicsAndSeriesCard';
 
-const CharacterDetail = ({route}) => {
+const CharacterDetail = ({route, navigation}) => {
   const [comics, setComics] = useState([]);
   const [series, setSeries] = useState([]);
 
@@ -34,8 +34,17 @@ const CharacterDetail = ({route}) => {
     fetchComicsAndSeries();
   }, [character]);
 
+  const handleComicSelect = item => {
+    navigation.navigate('ComicDetail', {comic: item});
+  };
+
   const renderComics = ({item}) => {
-    return <ComicsAndSeriesCard item={item} />;
+    return (
+      <ComicsAndSeriesCard
+        item={item}
+        onPress={() => handleComicSelect(item)}
+      />
+    );
   };
 
   const renderSeries = ({item}) => {
@@ -52,10 +61,12 @@ const CharacterDetail = ({route}) => {
       const snapshot = await favoritesRef.once('value');
       const data = snapshot.val();
       let isExists = false;
-      for (const key in data) {
-        if (data[key].character.id === character.id) {
-          isExists = true;
-          break;
+      if (data) {
+        for (const key in data) {
+          if (data[key]?.character?.id === character.id) {
+            isExists = true;
+            break;
+          }
         }
       }
       if (isExists) {
@@ -65,6 +76,7 @@ const CharacterDetail = ({route}) => {
         });
       } else {
         favoritesRef.push({
+          id: character.id,
           character: character,
         });
         showMessage({
