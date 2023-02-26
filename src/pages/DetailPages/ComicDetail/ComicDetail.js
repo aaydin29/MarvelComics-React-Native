@@ -101,6 +101,7 @@ const ComicDetail = ({route, navigation}) => {
         keyExtractor={item => item.id.toString()}
         data={characters}
         renderItem={renderCharacters}
+        showsHorizontalScrollIndicator={false}
       />
       <Text style={styles.titles}>Creators</Text>
       <FlatList
@@ -108,6 +109,7 @@ const ComicDetail = ({route, navigation}) => {
         keyExtractor={item => item.id.toString()}
         data={creators}
         renderItem={renderSeries}
+        showsHorizontalScrollIndicator={false}
       />
     </ScrollView>
   );
