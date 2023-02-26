@@ -11,6 +11,7 @@ import Home from './pages/BottomTabPages/Home';
 import Favorites from './pages/BottomTabPages/Favorites';
 
 import CharacterDetail from './pages/DetailPages/CharacterDetail';
+import ComicDetail from './pages/DetailPages/ComicDetail';
 
 import BottomTabBarIcon from './components/BottomTabBarIcon';
 
@@ -61,6 +62,11 @@ const Router = () => {
           component={CharacterDetail}
           options={CharacterDetailOptions}
         />
+        <Stack.Screen
+          name="ComicDetail"
+          component={ComicDetail}
+          options={ComicDetailOptions}
+        />
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>
@@ -88,6 +94,14 @@ const FavoritesOptions = () => ({
 });
 
 const CharacterDetailOptions = () => ({
+  headerShown: true,
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: '#202020',
+  },
+});
+
+const ComicDetailOptions = () => ({
   headerShown: true,
   headerTintColor: 'white',
   headerStyle: {

@@ -7,22 +7,22 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  character_container: {
+  comic_container: {
     backgroundColor: colors.darkgray,
     marginBottom: 10,
   },
-  character_image: {
+  comic_image: {
     width: deviceSize.width / 1,
     height: 300,
   },
-  character_name: {
+  comic_name: {
     color: colors.red,
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
     marginTop: 10,
   },
-  character_description: {
+  comic_description: {
     margin: 10,
     marginTop: 5,
     textAlign: 'center',
@@ -41,6 +41,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     borderBottomWidth: 1,
     paddingBottom: 5,
+    marginBottom: 10,
     marginHorizontal: 100,
   },
 });

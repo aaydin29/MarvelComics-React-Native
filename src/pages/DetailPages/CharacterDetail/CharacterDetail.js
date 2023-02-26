@@ -13,8 +13,7 @@ import {showMessage} from 'react-native-flash-message';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './CharacterDetail.style';
 
-import {getSeriesForCharacter} from '../../../marvelAPI';
-import {getComicsForCharacter} from '../../../marvelAPI';
+import {getSeriesForCharacter, getComicsForCharacter} from '../../../marvelAPI';
 
 import ComicsAndSeriesCard from '../../../components/cards/ComicsAndSeriesCard';
 

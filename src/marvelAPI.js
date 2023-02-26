@@ -4,7 +4,7 @@ import CryptoJS from 'crypto-js';
 const publicKey = '2e377760d9a4902a6d6552b5ad088db2';
 const privateKey = '09109523d821a3784144fd1a67e482e1e6ce0d31';
 
-const getCharacters = async (limit = 50) => {
+const getCharacters = async (limit = 100) => {
   const timestamp = new Date().getTime();
   const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
   const apiUrl = `https://gateway.marvel.com:443/v1/public/characters?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
@@ -82,6 +82,32 @@ const getSeriesForCharacter = async (characterId, limit = 50) => {
   }
 };
 
+const getCharactersForComic = async (comicId, limit = 50) => {
+  const timestamp = new Date().getTime();
+  const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
+  const apiUrl = `https://gateway.marvel.com:443/v1/public/comics/${comicId}/characters?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data.data.results;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const getCreatorsForComic = async (comicId, limit = 50) => {
+  const timestamp = new Date().getTime();
+  const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
+  const apiUrl = `https://gateway.marvel.com:443/v1/public/comics/${comicId}/creators?limit=${limit}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data.data.results;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export {
   getCharacters,
   getComics,
@@ -89,4 +115,6 @@ export {
   getEvents,
   getComicsForCharacter,
   getSeriesForCharacter,
+  getCharactersForComic,
+  getCreatorsForComic,
 };

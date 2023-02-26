@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, Image} from 'react-native';
+import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {getComics} from '../../../marvelAPI';
 import styles from './Comics.style';
 
-const Comics = () => {
+const Comics = ({navigation}) => {
   const [comics, setComics] = useState([]);
 
   useEffect(() => {
@@ -14,15 +14,21 @@ const Comics = () => {
     fetchData();
   }, []);
 
+  const handleComicSelect = comic => {
+    navigation.navigate('ComicDetail', {comic});
+  };
+
   const renderComics = ({item}) => {
     return (
-      <View style={styles.comic_container}>
-        <Image
-          style={styles.comic_image}
-          source={{uri: `${item.thumbnail.path}.${item.thumbnail.extension}`}}
-        />
-        <Text style={styles.comic_title}>{item.title}</Text>
-      </View>
+      <TouchableOpacity onPress={() => handleComicSelect(item)}>
+        <View style={styles.comic_container}>
+          <Image
+            style={styles.comic_image}
+            source={{uri: `${item.thumbnail.path}.${item.thumbnail.extension}`}}
+          />
+          <Text style={styles.comic_title}>{item.title}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
