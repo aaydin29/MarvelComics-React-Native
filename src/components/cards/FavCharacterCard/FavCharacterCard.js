@@ -21,12 +21,8 @@ const FavCharacterCard = ({item, onPress, navigation}) => {
       );
   };
 
-  const handleCharacterDetail = () => {
-    // navigation.navigate('CharacterDetail', {item: item.character});
-  };
-
   return (
-    <TouchableOpacity onPress={() => handleCharacterDetail(item)}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Image
           style={styles.image}

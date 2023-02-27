@@ -9,6 +9,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 5,
     margin: 5,
+    paddingRight: 20,
     borderRadius: 10,
   },
   image: {
@@ -21,6 +22,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     marginLeft: 15,
+    marginRight: 15,
     flex: 1,
   },
 });

@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  Image,
-} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 
@@ -72,11 +65,25 @@ const Favorites = ({navigation}) => {
   }, []);
 
   const renderCharacter = ({item}) => {
-    return <FavCharacterCard item={item} navigation={navigation} />;
+    return (
+      <FavCharacterCard
+        item={item}
+        onPress={() => handleCharacterDetail(item)}
+      />
+    );
+  };
+
+  const handleCharacterDetail = item => {
+    navigation.navigate('CharacterDetail', {character: item.character});
   };
 
   const renderComic = ({item}) => {
-    return <FavComicCard item={item} />;
+    return <FavComicCard item={item} onPress={() => handleComicDetail(item)} />;
+  };
+
+  const handleComicDetail = item => {
+    console.log(item);
+    navigation.navigate('ComicDetail', {comic: item.comic});
   };
 
   return (
