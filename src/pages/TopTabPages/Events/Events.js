@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
+
 import {getEvents} from '../../../marvelAPI';
 import styles from './Events.style';
 
@@ -7,6 +8,7 @@ const Events = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    //Pulls data from marvelAPI.js and adds it to state.
     const fetchData = async () => {
       const result = await getEvents();
       setEvents(result);

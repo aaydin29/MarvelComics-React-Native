@@ -13,7 +13,6 @@ export default StyleSheet.create({
     paddingRight: 20,
   },
   image: {
-    // marginHorizontal: 10,
     width: 100,
     height: 120,
     borderRadius: 5,

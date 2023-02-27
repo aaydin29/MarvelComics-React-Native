@@ -14,9 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Loading from '../../../components/Loading/Loading';
 import styles from './CharacterDetail.style';
-
 import {getSeriesForCharacter, getComicsForCharacter} from '../../../marvelAPI';
-
 import ComicsAndSeriesCard from '../../../components/cards/ComicsAndSeriesCard';
 
 const CharacterDetail = ({route, navigation}) => {
@@ -27,6 +25,8 @@ const CharacterDetail = ({route, navigation}) => {
   const {character} = route.params;
 
   useEffect(() => {
+    // It pulls the series and cpmics data listed on the character detail page from the API using marvelAPI.js and adds it to the states.
+
     const fetchComicsAndSeries = async () => {
       const comicsResult = await getComicsForCharacter(character.id);
       setComics(comicsResult);
@@ -39,24 +39,8 @@ const CharacterDetail = ({route, navigation}) => {
     fetchComicsAndSeries();
   }, [character]);
 
-  const handleComicSelect = item => {
-    navigation.navigate('ComicDetail', {comic: item});
-  };
-
-  const renderComics = ({item}) => {
-    return (
-      <ComicsAndSeriesCard
-        item={item}
-        onPress={() => handleComicSelect(item)}
-      />
-    );
-  };
-
-  const renderSeries = ({item}) => {
-    return <ComicsAndSeriesCard item={item} />;
-  };
-
   const handleAddFavorites = async () => {
+    //When the add to favorite icon is clicked, it sends the selected character to the user's data in the database.
     const user = auth().currentUser;
     if (user) {
       const userId = user.uid;
@@ -90,6 +74,24 @@ const CharacterDetail = ({route, navigation}) => {
         });
       }
     }
+  };
+
+  const renderComics = ({item}) => {
+    return (
+      <ComicsAndSeriesCard
+        item={item}
+        onPress={() => handleComicSelect(item)}
+      />
+    );
+  };
+
+  const handleComicSelect = item => {
+    // Redirects to the detail page of the selected comic.
+    navigation.navigate('ComicDetail', {comic: item});
+  };
+
+  const renderSeries = ({item}) => {
+    return <ComicsAndSeriesCard item={item} />;
   };
 
   return (

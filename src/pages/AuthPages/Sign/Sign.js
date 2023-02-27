@@ -20,6 +20,7 @@ const Sign = ({navigation}) => {
   };
 
   const handleFormSubmit = async formValues => {
+    // Checks if the passwords match.
     if (formValues.repassword !== formValues.password) {
       showMessage({
         message: 'Passwords must match!',
@@ -28,6 +29,7 @@ const Sign = ({navigation}) => {
       return;
     }
     try {
+      // It allows the user to register with the information entered.
       await auth().createUserWithEmailAndPassword(
         formValues.email,
         formValues.repassword,

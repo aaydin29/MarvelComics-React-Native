@@ -4,10 +4,12 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import {showMessage} from 'react-native-flash-message';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import styles from './FavComicCard.style';
 
 const FavComicCard = ({item, onPress}) => {
   const handleDeleteComic = () => {
+    // It allows the user to delete the selected comic from their favorites in the database. Since the comic on the screen is pulled from the database, the deleted comic is deleted from the screen.
     const user = auth().currentUser;
     const userId = user.uid;
     database()

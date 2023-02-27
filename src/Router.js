@@ -44,6 +44,7 @@ const Router = () => {
   const [userSession, setUserSession] = useState();
 
   useEffect(() => {
+    // Queries whether the registered user ID exists and assigns this information to userSession. Because when the user opens the application, we use it to redirect to the home page if user has registered and has not logged out.
     auth().onAuthStateChanged(user => {
       setUserSession(!!user);
     });

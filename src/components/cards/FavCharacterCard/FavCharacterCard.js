@@ -4,10 +4,12 @@ import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {showMessage} from 'react-native-flash-message';
+
 import styles from './FavCharacterCard.style';
 
 const FavCharacterCard = ({item, onPress, navigation}) => {
   const handleDeleteCharacter = () => {
+    // It allows the user to delete the selected character from their favorites in the database. Since the character on the screen is pulled from the database, the deleted character is deleted from the screen.
     const user = auth().currentUser;
     const userId = user.uid;
     database()

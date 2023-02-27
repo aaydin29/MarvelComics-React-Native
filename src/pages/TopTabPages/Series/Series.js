@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
+
 import {getSeries} from '../../../marvelAPI';
 import styles from './Series.style';
 
@@ -7,6 +8,7 @@ const Series = () => {
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
+    //Pulls data from marvelAPI.js and adds it to state.
     const fetchData = async () => {
       const result = await getSeries();
       setSeries(result);

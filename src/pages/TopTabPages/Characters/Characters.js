@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
+
 import {getCharacters} from '../../../marvelAPI';
 import styles from './Characters.style';
 
@@ -7,6 +8,7 @@ const Characters = ({navigation}) => {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
+    // Pulls data from marvelAPI.js and adds it to state.
     const fetchData = async () => {
       const result = await getCharacters();
       setCharacters(result);

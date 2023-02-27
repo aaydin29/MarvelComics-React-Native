@@ -20,6 +20,7 @@ const Login = ({navigation}) => {
 
   const handleFormSubmit = async formValues => {
     try {
+      // It allows the user to log in with the registered information.
       await auth().signInWithEmailAndPassword(
         formValues.email,
         formValues.password,

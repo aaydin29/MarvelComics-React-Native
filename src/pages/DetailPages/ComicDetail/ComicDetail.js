@@ -24,6 +24,8 @@ const ComicDetail = ({route, navigation}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // It pulls the character and creators data listed on the comic detail page from the API using marvelAPI.js and adds it to the states.
+
     const fetchCharactersAndCreators = async () => {
       const charactersResult = await getCharactersForComic(comic.id);
       setCharacters(charactersResult);
@@ -37,6 +39,7 @@ const ComicDetail = ({route, navigation}) => {
   }, [comic]);
 
   const handleAddFavorites = async () => {
+    // When the add to favorite icon is clicked, it sends the selected comic to the user's data in the database.
     const user = auth().currentUser;
     if (user) {
       const userId = user.uid;
@@ -70,10 +73,6 @@ const ComicDetail = ({route, navigation}) => {
     }
   };
 
-  const handleCharacterSelect = item => {
-    navigation.navigate('CharacterDetail', {character: item});
-  };
-
   const renderCharacters = ({item}) => {
     return (
       <CharactersAndCreatorsCard
@@ -82,6 +81,12 @@ const ComicDetail = ({route, navigation}) => {
       />
     );
   };
+
+  const handleCharacterSelect = item => {
+    // Redirects to the detail page of the selected character.
+    navigation.navigate('CharacterDetail', {character: item});
+  };
+
   const renderSeries = ({item}) => {
     return <CharactersAndCreatorsCard item={item} />;
   };

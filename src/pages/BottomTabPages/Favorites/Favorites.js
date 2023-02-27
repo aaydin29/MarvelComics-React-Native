@@ -25,6 +25,7 @@ const Favorites = ({navigation}) => {
 
   useEffect(() => {
     const fetchFavoriteCharacters = async () => {
+      // It pulls the characters that the user adds to the favorites from the database.
       const user = auth().currentUser;
       if (user) {
         const userId = user.uid;
@@ -46,6 +47,7 @@ const Favorites = ({navigation}) => {
     };
 
     const fetchFavoriteComics = async () => {
+      // It pulls the comics that the user adds to the favorites from the database.
       const user = auth().currentUser;
       if (user) {
         const userId = user.uid;
@@ -78,6 +80,7 @@ const Favorites = ({navigation}) => {
   };
 
   const handleCharacterDetail = item => {
+    // Redirects to the detail page of the selected character.
     navigation.navigate('CharacterDetail', {character: item.character});
   };
 
@@ -86,6 +89,7 @@ const Favorites = ({navigation}) => {
   };
 
   const handleComicDetail = item => {
+    // Redirects to the detail page of the selected comic.
     console.log(item);
     navigation.navigate('ComicDetail', {comic: item.comic});
   };
@@ -139,7 +143,7 @@ const Favorites = ({navigation}) => {
         )}
         {loading && (
           <View style={styles.loadingContainer}>
-            <Loading />
+            <Loading color="#202020" />
           </View>
         )}
       </View>

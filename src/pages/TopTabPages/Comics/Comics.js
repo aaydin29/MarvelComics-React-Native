@@ -10,6 +10,7 @@ const Comics = ({navigation}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    //Pulls data from marvelAPI.js and adds it to state.
     const fetchData = async () => {
       const result = await getComics();
       setComics(result);
