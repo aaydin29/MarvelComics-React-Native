@@ -15,11 +15,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {getCharactersForComic, getCreatorsForComic} from '../../../marvelAPI';
 import CharactersAndCreatorsCard from '../../../components/cards/CharactersAndCreatorsCard';
 import styles from './ComicDetail.style';
+import Loading from '../../../components/Loading/Loading';
 
 const ComicDetail = ({route, navigation}) => {
   const {comic} = route.params;
   const [characters, setCharacters] = useState([]);
   const [creators, setCreators] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCharactersAndCreators = async () => {
@@ -28,6 +30,8 @@ const ComicDetail = ({route, navigation}) => {
 
       const creatorsResult = await getCreatorsForComic(comic.id);
       setCreators(creatorsResult);
+
+      setLoading(false);
     };
     fetchCharactersAndCreators();
   }, [comic]);
@@ -96,21 +100,29 @@ const ComicDetail = ({route, navigation}) => {
         </TouchableOpacity>
       </View>
       <Text style={styles.titles}>Characters</Text>
-      <FlatList
-        horizontal
-        keyExtractor={item => item.id.toString()}
-        data={characters}
-        renderItem={renderCharacters}
-        showsHorizontalScrollIndicator={false}
-      />
+      {loading ? (
+        <Loading color="#202020" />
+      ) : (
+        <FlatList
+          horizontal
+          keyExtractor={item => item.id.toString()}
+          data={characters}
+          renderItem={renderCharacters}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
       <Text style={styles.titles}>Creators</Text>
-      <FlatList
-        horizontal
-        keyExtractor={item => item.id.toString()}
-        data={creators}
-        renderItem={renderSeries}
-        showsHorizontalScrollIndicator={false}
-      />
+      {loading ? (
+        <Loading color="#202020" />
+      ) : (
+        <FlatList
+          horizontal
+          keyExtractor={item => item.id.toString()}
+          data={creators}
+          renderItem={renderSeries}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </ScrollView>
   );
 };

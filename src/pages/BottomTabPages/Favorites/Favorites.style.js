@@ -29,4 +29,8 @@ export default StyleSheet.create({
     borderBottomWidth: 4,
     borderColor: colors.darkgray,
   },
+  no_favorites_text: {
+    marginTop: 10,
+    textAlign: 'center',
+  },
 });

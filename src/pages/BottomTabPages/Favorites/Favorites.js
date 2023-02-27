@@ -6,8 +6,10 @@ import database from '@react-native-firebase/database';
 import styles from './Favorites.style';
 import FavCharacterCard from '../../../components/cards/FavCharacterCard/FavCharacterCard';
 import FavComicCard from '../../../components/cards/FavComicCard/FavComicCard';
+import Loading from '../../../components/Loading/Loading';
 
 const Favorites = ({navigation}) => {
+  const [loading, setLoading] = useState(true);
   const [characters, setCharacters] = useState([]);
   const [comics, setComics] = useState([]);
   const [sliderState, setSliderState] = useState({
@@ -38,6 +40,7 @@ const Favorites = ({navigation}) => {
             }));
             setCharacters(charactersList);
           }
+          setLoading(false);
         });
       }
     };
@@ -56,6 +59,7 @@ const Favorites = ({navigation}) => {
             }));
             setComics(comicsList);
           }
+          setLoading(false);
         });
       }
     };
@@ -111,17 +115,32 @@ const Favorites = ({navigation}) => {
       </View>
       <View>
         {sliderState.currentPage === 1 ? (
-          <FlatList
-            data={characters}
-            keyExtractor={item => item.id}
-            renderItem={renderCharacter}
-          />
-        ) : (
+          characters.length > 0 ? (
+            <FlatList
+              data={characters}
+              keyExtractor={item => item.id}
+              renderItem={renderCharacter}
+            />
+          ) : (
+            <Text style={styles.no_favorites_text}>
+              You don't have any favorite character.
+            </Text>
+          )
+        ) : comics.length > 0 ? (
           <FlatList
             data={comics}
             keyExtractor={item => item.id}
             renderItem={renderComic}
           />
+        ) : (
+          <Text style={styles.no_favorites_text}>
+            You don't have any favorite comic.
+          </Text>
+        )}
+        {loading && (
+          <View style={styles.loadingContainer}>
+            <Loading />
+          </View>
         )}
       </View>
     </View>

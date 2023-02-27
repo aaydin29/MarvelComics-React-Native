@@ -11,6 +11,8 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import {showMessage} from 'react-native-flash-message';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Loading from '../../../components/Loading/Loading';
 import styles from './CharacterDetail.style';
 
 import {getSeriesForCharacter, getComicsForCharacter} from '../../../marvelAPI';
@@ -20,6 +22,7 @@ import ComicsAndSeriesCard from '../../../components/cards/ComicsAndSeriesCard';
 const CharacterDetail = ({route, navigation}) => {
   const [comics, setComics] = useState([]);
   const [series, setSeries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const {character} = route.params;
 
@@ -30,6 +33,8 @@ const CharacterDetail = ({route, navigation}) => {
 
       const seriesResult = await getSeriesForCharacter(character.id);
       setSeries(seriesResult);
+
+      setLoading(false);
     };
     fetchComicsAndSeries();
   }, [character]);
@@ -105,21 +110,29 @@ const CharacterDetail = ({route, navigation}) => {
         </TouchableOpacity>
       </View>
       <Text style={styles.titles}>Comics</Text>
-      <FlatList
-        horizontal
-        data={comics}
-        renderItem={renderComics}
-        keyExtractor={item => item.id.toString()}
-        showsHorizontalScrollIndicator={false}
-      />
+      {loading ? (
+        <Loading color="#202020" />
+      ) : (
+        <FlatList
+          horizontal
+          data={comics}
+          renderItem={renderComics}
+          keyExtractor={item => item.id.toString()}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
       <Text style={styles.titles}>Series</Text>
-      <FlatList
-        horizontal
-        data={series}
-        renderItem={renderSeries}
-        keyExtractor={item => item.id.toString()}
-        showsHorizontalScrollIndicator={false}
-      />
+      {loading ? (
+        <Loading color="#202020" />
+      ) : (
+        <FlatList
+          horizontal
+          data={series}
+          renderItem={renderSeries}
+          keyExtractor={item => item.id.toString()}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </ScrollView>
   );
 };

@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
+
+import Loading from '../../../components/Loading/Loading';
 import {getComics} from '../../../marvelAPI';
 import styles from './Comics.style';
 
 const Comics = ({navigation}) => {
   const [comics, setComics] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await getComics();
       setComics(result);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -34,11 +38,18 @@ const Comics = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={comics}
-        renderItem={renderComics}
-        keyExtractor={item => item.id.toString()}
-      />
+      {loading ? (
+        <View style={styles.loading}>
+          <Loading color="white" />
+        </View>
+      ) : (
+        <FlatList
+          data={comics}
+          renderItem={renderComics}
+          keyExtractor={item => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };

@@ -32,6 +32,7 @@ const Events = () => {
         data={events}
         renderItem={renderEvents}
         keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

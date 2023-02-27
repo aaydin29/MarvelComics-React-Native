@@ -32,6 +32,7 @@ const Series = () => {
         data={series}
         renderItem={renderSeries}
         keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

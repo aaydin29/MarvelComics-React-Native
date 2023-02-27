@@ -39,6 +39,7 @@ const Characters = ({navigation}) => {
         data={characters}
         renderItem={renderCharacters}
         keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
